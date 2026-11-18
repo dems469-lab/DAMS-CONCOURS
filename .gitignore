@@ -1,0 +1,23 @@
+# Dépendances
+node_modules/
+
+# Environnement et secrets — jamais commités (règle permanente n°6)
+.env
+.env.local
+.env.*.local
+*.pem
+service_role*
+
+# Builds
+dist/
+dist-ssr/
+coverage/
+
+# Capacitor / Android (ajoutés au PROMPT 11)
+android/
+ios/
+
+# Divers
+*.log
+.DS_Store
+.vite/
