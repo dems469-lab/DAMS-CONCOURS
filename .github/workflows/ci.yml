@@ -19,7 +19,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
+          # Cache npm actif dès l'existence du projet (PROMPT 02)
+          cache: ${{ hashFiles('package.json') != '' && 'npm' || '' }}
 
       # Tant que le projet n'a pas encore de package.json (phase de planification),
       # la CI ne fait qu'attester du push. À partir du PROMPT 02, ces étapes
