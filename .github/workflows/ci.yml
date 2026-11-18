@@ -21,11 +21,17 @@ jobs:
           node-version: 22
           cache: npm
 
+      # Tant que le projet n'a pas encore de package.json (phase de planification),
+      # la CI ne fait qu'attester du push. À partir du PROMPT 02, ces étapes
+      # s'exécutent automatiquement à chaque push.
       - name: Installer les dépendances
+        if: hashFiles('package.json') != ''
         run: npm install
 
       - name: Vérification TypeScript
+        if: hashFiles('package.json') != ''
         run: npm run typecheck --if-present
 
       - name: Build de production
+        if: hashFiles('package.json') != ''
         run: npm run build
