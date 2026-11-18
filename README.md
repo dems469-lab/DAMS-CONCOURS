@@ -18,7 +18,15 @@ Plateforme éducative gratuite pour la préparation des **concours directs de la
 
 ## Stack technique
 
-React · TypeScript · Vite · Tailwind CSS · React Router · Lucide React · React Hook Form · Zod · Dexie (IndexedDB) · Supabase · vite-plugin-pwa · Capacitor (Android)
+React 18 · TypeScript (strict) · Vite 6 · Tailwind CSS 3.4 · React Router 6 · Lucide React · React Hook Form + Zod · Dexie (IndexedDB, à venir) · Supabase (à venir) · Capacitor (Android, à venir)
+
+## Fonctionnalités (PROMPT 02 — fondations et interface)
+
+- **Espace public** : accueil, catalogue des concours, fonctionnalités, à propos, conditions d'utilisation, politique de confidentialité, 404.
+- **Espace candidat** : tableau de bord, profil, modules Matières / Cours / Bibliothèque / Entraînement / Examens blancs / Planning / Résultats (affichés explicitement « Module en préparation », jamais maquettés).
+- **Espace administrateur** : `/admin` protégé par un guard, tableau de bord et 12 modules (interface seule, logique métier aux phases suivantes).
+- **Design system** : 23 composants réutilisables, mode clair / sombre persistant, navigation inférieure sur mobile et latérale sur ordinateur.
+- **Authentification** : formulaires validés (React Hook Form + Zod), aucun faux système de connexion — message explicite tant que Supabase n'est pas configuré.
 
 ## Compilation sur GitHub
 

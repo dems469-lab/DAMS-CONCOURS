@@ -29,47 +29,44 @@ Contraintes permanentes :
 | Mobile | Capacitor (préparé au PROMPT 11, non installé maintenant) | Réutilise la même codebase |
 | Tests | Vitest (+ Playwright en audit, PROMPT 10) | Unitaires + parcours |
 
-## 3. Structure des dossiers (cible)
+## Structure des dossiers (cible — état réel après PROMPT 02)
 
 ```
 DAMS-CONCOURS/
 ├── public/                  # Manifest PWA, icônes, service worker (via plugin)
 ├── src/
-│   ├── app/                 # Routes, providers (theme, sync, auth), layout
-│   ├── assets/
+│   ├── app/
+│   │   ├── App.tsx          # Providers globaux + BrowserRouter
+│   │   ├── router.tsx       # Routes des 3 espaces + 404
+│   │   ├── guards.tsx       # RequireAuth, RequireAdmin (ergonomie ; RLS = autorité réelle)
+│   │   ├── NotFoundPage.tsx
+│   │   ├── layouts/         # PublicLayout, CandidateLayout, AdminLayout
+│   │   └── providers/       # ThemeProvider (clair/sombre persistant)
 │   ├── components/
-│   │   ├── ui/              # Design system : Button, Card, Input, Select, Badge,
-│   │   │                    # Modal, EmptyState, ErrorState, Skeleton, Toast…
-│   │   ├── layout/          # AppShell, BottomNav (mobile), Sidebar (desktop), TopBar
-│   │   └── domain/          # Composants métier : QuestionCard, ExamTimer, SyncBadge…
+│   │   ├── ui/              # Design system (23 composants) : Button, Input, Textarea,
+│   │   │                    # Select, Checkbox, Radio, Card, Badge, Modal/Dialog,
+│   │   │                    # Dropdown, Table, Pagination, Tabs, Tooltip, Alert, Toast,
+│   │   │                    # Skeleton, EmptyState, ErrorState, LoadingState, PageHeader,
+│   │   │                    # SearchBar, StatCard
+│   │   └── domain/          # ModuleInPreparation (état explicite des modules à venir)
 │   ├── features/
-│   │   ├── home/            # Accueil
-│   │   ├── auth/            # Connexion, inscription, profil
-│   │   ├── contests/        # Catalogue + fiches concours
-│   │   ├── subjects/        # Matières, chapitres, leçons
-│   │   ├── library/         # Bibliothèque de documents
-│   │   ├── practice/        # Moteur QCM + historique des tentatives
-│   │   ├── exams/           # Simulateur d'examens blancs
-│   │   ├── planner/         # Planning + révision espacée
-│   │   ├── stats/           # Statistiques et graphiques
-│   │   ├── admin/           # Panneau d'administration (visuellement séparé)
-│   │   └── sync/            # File d'attente, moteur de sync, indicateurs réseau
-│   ├── data/
-│   │   ├── db/              # Dexie : schéma, migrations, tables
-│   │   ├── repositories/    # Accès données local (une interface par entité)
-│   │   └── sync/            # SyncQueue, stratégies de conflit, mapping cloud
+│   │   ├── home/            # Accueil (slogan, sections statiques)
+│   │   ├── public/          # Catalogue concours, fonctionnalités, à propos, CGU, confidentialité
+│   │   ├── auth/            # Connexion, inscription, mot de passe oublié, profil
+│   │   ├── dashboard/       # Tableau de bord candidat
+│   │   ├── admin/           # Tableau de bord administrateur (modules : interface seule)
+│   │   ├── contests/        # PROMPT 05
+│   │   ├── subjects/ library/ practice/ exams/ planner/ stats/  # PROMPTS 05-08
+│   │   └── sync/            # PROMPT 09
 │   ├── services/
-│   │   ├── supabase/        # Client Supabase (clé anon uniquement), API cloud
-│   │   ├── auth/            # Session, connexion anonyme locale → migration compte
-│   │   └── seed/            # Données d'amorçage NON officielles (clairement marquées)
-│   ├── hooks/               # useOnline, useTheme, useLocalQuery, useDebounce…
-│   ├── lib/                 # Utilitaires : dates, notation, formatage, uuid
-│   ├── types/               # Types TypeScript partagés (entités, DTO)
-│   └── main.tsx
-├── supabase/
-│   ├── migrations/          # SQL versionné
-│   └── seed.sql             # Amorçage non officiel
-├── docs/                    # Documentation complémentaire (déploiement, imports)
+│   │   ├── auth/            # authService (détection cloud), session
+│   │   └── profile/         # localProfile (localStorage)
+│   ├── hooks/               # useOnline, useTheme…
+│   ├── lib/                 # brand.ts (identité officielle), utils.ts
+│   ├── types/
+│   └── index.css
+├── supabase/migrations/     # PROMPT 03
+├── .github/workflows/ci.yml # Build de production sur GitHub à chaque push
 ├── PROJECT_ARCHITECTURE.md
 ├── PROJECT_STATUS.md
 ├── DEVELOPMENT_PLAN.md

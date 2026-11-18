@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-offwhite text-slate-900 antialiased;
+    @apply dark:bg-navy-950 dark:text-offwhite;
+    font-feature-settings: 'ss01' on;
+    overflow-x: hidden;
+  }
+  /* Zone sûre iOS / barres Android */
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-electric-500 ring-offset-1 ring-offset-offwhite dark:ring-offset-navy-950;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply bg-white dark:bg-navy-800;
+  }
+  .surface-border {
+    @apply border-slate-200 dark:border-navy-600;
+  }
+  .text-muted {
+    @apply text-grayblue-600 dark:text-grayblue-400;
+  }
+  .input-base {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900
+      placeholder:text-grayblue-400 transition-colors
+      focus:border-electric-500 focus:outline-none focus:ring-2 focus:ring-electric-500/30
+      dark:border-navy-600 dark:bg-navy-800 dark:text-offwhite dark:placeholder:text-grayblue-600;
+  }
+}
